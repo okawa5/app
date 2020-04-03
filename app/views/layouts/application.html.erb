@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pictgram</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>" role="alert"><%= value %></div>
+    <% end %>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-transparent">
+      <div class="container">
+        <%= link_to root_path do %>
+          <span><%= image_tag "icons/logo.png", class: "navbar-brand" %></span>
+        <% end %>
+        <ul class="nav navbar-nav navbar-right">
+          <% if logged_in? %>
+            <li>
+              <%= link_to favorites_index_path do %>
+                <%= image_tag "icons/heart.png" %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_topic_path do %>
+                <%= image_tag "icons/camera.png" %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to logout_path, method: :delete do %>
+                <%= image_tag "icons/logout.png" %>
+              <% end %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to new_user_path do %>
+                <%= image_tag "icons/register.png" %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to login_path do %>
+                <%= image_tag "icons/login.png" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+
+    <%= yield %>
+
+<script>
+  $(function(){
+    $(".alert").fadeOut(5000);
+  });
+</script>
+
+
+
+    <div class="top-hero-wrapper text-center">
+  <div class="container top-hero-container">
+    <h1 class="text-white">Make you Happy</h1>
+    <h2 class="text-white">Pictgram is a service that you can post photos.</h2>
+    <div class="row">
+      <div class="col-md-offset-3 col-md-3">
+        <%= link_to 'Sign up', '#', class: 'btn btn-block btn-white' %>
+      </div>
+      <div class="col-md-3">
+        <%= link_to 'Log in', '#',class: 'btn btn-block btn-white' %>
+      </div>
+    </div>
+  </div>
+</div>
+  
+    
+  </body>
+</html>
