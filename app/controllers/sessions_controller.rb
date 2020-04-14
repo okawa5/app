@@ -12,10 +12,10 @@ def create
       render :new
     end
 end
-def destroy
+    def destroy
     log_out
     redirect_to root_url, info: 'ログアウトしました'
-end
+    end
 
 
   private
@@ -28,5 +28,9 @@ end
     @current_user = nil
   end
 
+  private
+  def user_params
+    params.require(:user_id).permit(:name, :email, :password, :password_confirmation)
+  end
 
 end
